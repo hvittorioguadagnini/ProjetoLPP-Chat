@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat em Tempo Real</title>
+    <!-- Link para o arquivo CSS -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div id="messages"></div>
+    <div id="input-box">
+        <input type="text" id="input" placeholder="Digite sua mensagem...">
+        <button id="send">Enviar</button>
+    </div>
+
+    <!-- Link para o Socket.IO -->
+    <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+    <!-- Link para o arquivo JS -->
+    <script src="/static/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat em Tempo Real</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #0e0e10;
+            color: #efeff1;
+        }
+
+        #chat-container {
+            width: 50%;
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #323239;
+            border-radius: 8px;
+            background: #18181b;
+            overflow: hidden;
+        }
+
+        #messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            background: #0e0e10;
+            border-bottom: 1px solid #323239;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #efeff1;
+        }
+
+        #messages div {
+            margin-bottom: 8px;
+            word-wrap: break-word;
+        }
+
+        #messages div span.username {
+            font-weight: bold;
+            color: #00ff7f; /* Verde Neon */
+        }
+
+        #messages div span.message {
+            color: #efeff1;
+        }
+
+        #input-box {
+            display: flex;
+            padding: 10px;
+            background: #18181b;
+        }
+
+        #input {
+            flex: 1;
+            padding: 10px;
+            font-size: 14px;
+            color: #efeff1;
+            background: #0e0e10;
+            border: 1px solid #323239;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        #send {
+            margin-left: 10px;
+            padding: 10px 20px;
+            font-size: 14px;
+            background: #00ff7f; /* Verde Neon */
+            color: #0e0e10;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        #send:hover {
+            background: #00cc66; /* Verde Neon Escuro */
+        }
+
+        #send:active {
+            background: #00994d; /* Verde ainda mais escuro */
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="messages"></div>
+        <div id="input-box">
+            <input type="text" id="input" placeholder="Digite sua mensagem...">
+            <button id="send">Enviar</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+    <script>
+        const socket = io(); // Conecta ao servidor
+
+        const messages = document.getElementById('messages');
+        const input = document.getElementById('input');
+        const sendButton = document.getElementById('send');
+
+        // Recebe mensagens do servidor
+        socket.on('message', msg => {
+            const messageElement = document.createElement('div');
+            messageElement.innerHTML = `
+                <span class="username">Usuário:</span> 
+                <span class="message">${msg}</span>
+            `;
+            messages.appendChild(messageElement);
+            messages.scrollTop = messages.scrollHeight; // Scroll automático
+        });
+
+        // Envia mensagens ao servidor
+        sendButton.addEventListener('click', () => {
+            const message = input.value.trim();
+            if (message) {
+                socket.send(message);
+                input.value = ''; // Limpa o campo de entrada
+            }
+        });
+
+        // Envia mensagem ao pressionar "Enter"
+        input.addEventListener('keypress', event => {
+            if (event.key === 'Enter') {
+                sendButton.click();
+            }
+        });
+    </script>
+</body>
+</html>
