@@ -8,10 +8,21 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <div id="messages"></div>
-    <div id="input-box">
-        <input type="text" id="input" placeholder="Digite sua mensagem...">
-        <button id="send">Enviar</button>
+    <!-- Tela inicial para inserir o nome do usuário -->
+    <div id="username-box" class="center-screen">
+        <h1>Bem-vindo ao chat do nosso projeto de LPP!</h1>
+        <p>Por favor, digite seu nome para começar:</p>
+        <input type="text" id="username" placeholder="Digite seu nome..." class="username-input">
+        <button id="enter-chat" class="button">Entrar no Chat</button>
+    </div>
+
+    <!-- Interface do chat -->
+    <div id="chat" style="display: none;">
+        <div id="messages"></div>
+        <div id="input-box">
+            <input type="text" id="input" placeholder="Digite sua mensagem...">
+            <button id="send" class="button">Enviar</button>
+        </div>
     </div>
 
     <!-- Link para o Socket.IO -->
