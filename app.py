@@ -1,3 +1,4 @@
+import os
 from flask import Flask, send_from_directory, request
 from flask_socketio import SocketIO, emit, send
 
@@ -37,4 +38,10 @@ def handle_message(msg):
 
 # Inicialização do servidor
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', port=5000)
+    # host('127.0.0.1' ou 'localhost') para ambiente de teste:
+    # host = 'localhost'
+    # host para deploy:
+    host = '0.0.0.0'
+    port = int(os.getenv("PORT", 5000))  # Lê a variável PORT ou usa 5000 como padrão
+    print(f"Servidor rodando em http://{host}:{port}")
+    socketio.run(app, host=host, port=port)

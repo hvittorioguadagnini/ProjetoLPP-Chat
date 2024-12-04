@@ -18,9 +18,16 @@ enterChatButton.addEventListener('click', () => {
         username = enteredName;
         usernameBox.style.display = 'none';
         chatBox.style.display = 'block';
-        socket.emit('set_username', username); // Envia o nome ao servidor
+        socket.emit('set_username', username);
     } else {
         alert("Por favor, digite um nome.");
+    }
+});
+
+// Permitir pressionar Enter para entrar no chat
+usernameInput.addEventListener('keypress', event => {
+    if (event.key === 'Enter') {
+        enterChatButton.click();
     }
 });
 
@@ -33,7 +40,7 @@ socket.on('message', data => {
         <span class="message">${message}</span>
     `;
     messages.appendChild(messageElement);
-    messages.scrollTop = messages.scrollHeight; // Scroll automático
+    messages.scrollTop = messages.scrollHeight;
 });
 
 // Envia mensagens ao servidor
@@ -41,7 +48,7 @@ sendButton.addEventListener('click', () => {
     const message = input.value.trim();
     if (message) {
         socket.send(message);
-        input.value = ''; // Limpa o campo de entrada
+        input.value = '';
     }
 });
 
