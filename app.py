@@ -21,7 +21,7 @@ def handle_message(msg):
 
 # Inicialização do servidor
 if __name__ == '__main__':
-    host = '127.0.0.1'
+    host = '0.0.0.0'
     port = int(os.getenv("PORT", 5000))  # Lê a variável PORT ou usa 5000 como padrão
     print(f"Servidor rodando em http://{host}:{port}")
     socketio.run(app, host=host, port=port)
