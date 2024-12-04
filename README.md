@@ -16,11 +16,6 @@ Este projeto é uma aplicação de **chat em tempo real** desenvolvida utilizand
 - **Python**: Linguagem de programação usada no desenvolvimento da aplicação.
 - **Jinja2**: Template engine utilizada pelo Flask para renderizar páginas HTML.
 
-Aqui está o texto completo do README com a formatação adequada para o GitHub, utilizando os `#` para os títulos e subseções:
-
-```markdown
-
-
 ## Como Rodar o Projeto
 
 ### Clonar o repositório:
